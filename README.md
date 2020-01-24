@@ -1,3 +1,3 @@
 # SudokuSolver
 
-Program solve and sudoku board by Recursion.gir
+Program solve and sudoku board by Recursion.
