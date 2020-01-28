@@ -32,7 +32,8 @@ mousex = 18
 mousey = 18
 
 def solvesudoku(board):
-
+    pygame.display.update()
+    pygame.time.delay(300)
     find =  find_empty(board)
     if not find:
         return True
