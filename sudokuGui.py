@@ -28,10 +28,11 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 BLACK = (0,  0,  0)
 WHITE = (255,255,255)
 LIGHTGRAY = (200, 200, 200)
+mousex = 18
+mousey = 18
 
 def solvesudoku(board):
-    mousex = 18
-    mousey = 18
+
     find =  find_empty(board)
     if not find:
         return True
@@ -41,13 +42,14 @@ def solvesudoku(board):
     for i in range(1,10):
         if valid(board,(row,col),i):
             board[row][col]=i
-            Disply_text(mousex+50*row,mousey+50*col,str(i))
+          #  print(str(row)+" "+str(col)+" "+ str(i))
+            Disply_text(mousex + (50 * col), mousey + (50 * row), str(board[row][col]),(0,0,0))
 
             if solvesudoku(board):
                 return True
 
+            Disply_text(mousex + (50 * col), mousey + (50 * row), str(board[row][col]),WHITE) #for Erasing
             board[row][col]=0
-            textsurface = myfont.render("0", False, (0, 0, 0))
 
     return False
 
@@ -77,9 +79,10 @@ def main():
     pygame.display.set_caption('Sudoku Solver')
     DISPLAYSURF.fill(WHITE)
     drawGrid()
-
+    ak = 0;
+    initialize(board)
     while True: #main game loop
-        ak=0;
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -95,10 +98,15 @@ def main():
 def solver(board):
     solvesudoku(board)
 
-def Disply_text(x,y,text1):
-    textsurface = myfont.render(text1, False, (0, 0, 0))
+def Disply_text(x,y,text1,tup):
+    textsurface = myfont.render(text1, True, tup)
     DISPLAYSURF.blit(textsurface, (x, y))
 
+def initialize(board):
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] != 0:
+                Disply_text(mousex + (50 * j), mousey + (50 * i), str(board[i][j]),(0,0,255))
 
 
 if __name__=='__main__':
