@@ -7,7 +7,7 @@ How to Install:
 pip install requirement.txt
 ```
 
-####To Run:
+###To Run:
 
 Non-GUI
 ```
